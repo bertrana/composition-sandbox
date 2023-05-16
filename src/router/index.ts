@@ -1,24 +1,31 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import StockPage from '@/views/StockPage.vue';
-import DealsPage from '../views/DealsPage.vue';
-import FavoritesPage from '../views/FavoritesPage.vue';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+
+const routesArr: Array<RouteRecordRaw> = [
+  {
+    path: '/stock',
+    name: 'StockPage',
+    component: () => import("../views/stock/index.vue")
+  },
+  {
+    path: '/deals',
+    name: 'DealsPage',
+    component: () => import("../views/deals/index.vue")
+  },
+  {
+    path: '/favorites',
+    name: 'FavoritesPage',
+    component: () => import("../views/favorites/index.vue")
+  },
+];
 
 const routes = [
   {
     path: '/',
-    name: 'stock',
-    component: StockPage,
-  },
-  {
-    path: '/deals',
-    name: 'deals',
-    component: DealsPage,
-  },
-  {
-    path: '/favorites',
-    name: 'favorites',
-    component: FavoritesPage,
-  },
+    name: 'MainPage',
+    children: routesArr,
+    component: () => import("../views/MainPage.vue"),
+    redirect: '/stock',
+  }
 ];
 
 const router = createRouter({

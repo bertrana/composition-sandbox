@@ -27,15 +27,13 @@ const headerLinks: HeaderLink[] = [
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink v-for="(link, i) in headerLinks" :key="i" :to="link.path" :class="link.linkClass">
-          {{ link.title }}
-        </RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div class="wrapper">
+    <nav>
+      <RouterLink v-for="(link, i) in headerLinks" :key="i" :to="link.path" :class="link.linkClass">
+        {{ link.title }}
+      </RouterLink>
+    </nav>
+  </div>
 </template>
 
 <style scoped>
@@ -106,14 +104,14 @@ nav a::before {
 }
 
 nav a.stock::before {
-  background-image: url("./icons/IconStock.svg");
+  background-image: url("@/assets/icons/IconStock.svg");
 }
 
 nav a.favorites::before {
-  background-image: url("./icons/IconFavorites.svg");
+  background-image: url("@/assets/icons/IconFavorites.svg");
 }
 
 nav a.deals::before {
-  background-image: url("./icons/IconDeals.svg");
+  background-image: url("@/assets/icons/IconDeals.svg");
 }
 </style>

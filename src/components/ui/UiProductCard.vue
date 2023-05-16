@@ -1,7 +1,11 @@
+<script lang="ts" setup>
+
+</script>
+
 <template>
   <div class="product-card">
     <div class="product-card__description">
-      <div class="product-card__image"></div>
+      <img src="@/assets/images/card-image.png" alt="Card image" width="256" height="256">
       <div class="product-card__text-wrapper"></div>
     </div>
     <div class="product-card__price-wrapper">
