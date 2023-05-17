@@ -7,7 +7,7 @@ const randomBoolean = function (): boolean {
 const randomProductCard = function (): Product {
   return {
     id: Math.floor(Math.random() * 10000),
-    type: randomBoolean() ? "auction" : "direct",
+    type: randomBoolean() ? "auction" : "directDeals",
     name: randomBoolean() ? "Брус" : "Палка",
     isFavorite: randomBoolean(),
     isAddedToDeals: false,

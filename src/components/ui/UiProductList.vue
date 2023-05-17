@@ -1,15 +1,28 @@
+<script lang="ts">
+const defaultProduct: Array<Product> = [{
+  id: 10000,
+  type: "auction",
+  name: "Бревно",
+}];
+</script>
+
 <script setup lang="ts">
 import UiProductCard from './UiProductCard.vue';
-import getProductList from '@/core/getProductList';
 import Product from '@/types/ProductType';
 
-const products: Array<Product> = getProductList(10);
+interface Props {
+  productList: Product[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  productList: () => defaultProduct
+})
 
 </script>
 
 <template>
   <ul class="product__list">
-    <UiProductCard v-for="product in products" :key="product.id" :title="product.name" :deal-type="product.type"
+    <UiProductCard v-for="product in props.productList" :key="product.id" :title="product.name" :deal-type="product.type"
       :isFavorite="product.isFavorite" />
   </ul>
 </template>
