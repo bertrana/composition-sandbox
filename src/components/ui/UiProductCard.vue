@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-// import { ref, computed } from 'vue';
+import UiButton from './UiButton.vue';
+import UiButtonFav from './UiButtonFav.vue';
 
 const props = defineProps({
   title: String,
   dealType: String,
+  isFavorite: Boolean
 })
 
 const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
@@ -23,9 +25,7 @@ const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые 
         соответствует заявленному качеству - бесплатно меняем его.</p>
     </div>
     <div class="product-card__price-wrapper">
-      <b>
-        <b class="product-card__price">33000<span>₽</span></b>
-      </b>
+      <b class="product-card__price">33000<span>₽</span></b>
       <table>
         <tr>
           <th>Количество</th>
@@ -36,6 +36,10 @@ const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые 
           <th class="product-card__count">11000<span>₽</span></th>
         </tr>
       </table>
+      <div class="product-card__btn-wrapper">
+        <UiButton />
+        <UiButtonFav :is-active="props.isFavorite" />
+      </div>
     </div>
   </li>
 </template>
@@ -68,5 +72,11 @@ const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые 
 
   border: 1px solid #E0E3EE;
   border-radius: 20px;
+}
+
+.product-card__btn-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 </style>

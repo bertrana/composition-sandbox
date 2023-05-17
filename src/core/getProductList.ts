@@ -9,7 +9,7 @@ const randomProductCard = function (): Product {
     id: Math.floor(Math.random() * 10000),
     type: randomBoolean() ? "auction" : "direct",
     name: randomBoolean() ? "Брус" : "Палка",
-    isFavourite: randomBoolean(),
+    isFavorite: randomBoolean(),
     isAddedToDeals: false,
     isPaid: false
   };
