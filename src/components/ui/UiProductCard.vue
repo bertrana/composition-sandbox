@@ -1,13 +1,20 @@
 <script lang="ts" setup>
+// import { ref, computed } from 'vue';
 
+const props = defineProps({
+  title: String,
+  dealType: String,
+})
+
+const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
 </script>
 
 <template>
   <li class="product-card">
     <img class="product-card__img" src="@/assets/images/card-image.png" alt="Card image" width="256" height="256">
     <div class="product-card__text-wrapper">
-      <b class="product-card__deal-type">Аукцион</b>
-      <h3 class="product-card__title">Пиломатериалы брус доска</h3>
+      <b class="product-card__deal-type">{{ dealType }}</b>
+      <h3 class="product-card__title">Пиломатериалы {{ props.title?.toLowerCase() }}</h3>
       <p class="product-card__description">Распродажа пиломатериалов в связи закрытием ЛЕСО-БАЗЫ!
         Успейте приобрести пиломатериал со скидками до закрытия 01.06.2022 !
         Мы стараемся быть не такими как все и даем вам: Доставка в согласованный день, если переносим - доставка
