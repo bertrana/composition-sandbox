@@ -10,8 +10,8 @@ const randomProductCard = function (): Product {
     type: randomBoolean() ? "auction" : "direct",
     name: randomBoolean() ? "Брус" : "Палка",
     isFavourite: randomBoolean(),
-    isAddedToDeals: randomBoolean(),
-    isPaid: randomBoolean()
+    isAddedToDeals: false,
+    isPaid: false
   };
 }
 

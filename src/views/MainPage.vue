@@ -3,7 +3,7 @@
     <LayoutHeader />
   </header>
   <main>
-    <div class="container container--filter">
+    <div class="container container_filter">
       <LayoutFilter />
       <LayoutSearch />
     </div>
@@ -18,3 +18,13 @@ import LayoutFilter from '@/components/layout/LayoutFilter.vue';
 import LayoutSearch from '@/components/layout/LayoutSearch.vue';
 
 </script>
+
+<style>
+.container_filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 40px;
+}
+</style>

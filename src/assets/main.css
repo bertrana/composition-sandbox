@@ -22,7 +22,7 @@ body {
   white-space: nowrap;
 }
 
-.container--filter {
+.container_filter {
   display: flex;
   align-items: center;
   justify-content: space-between;
