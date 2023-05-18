@@ -10,7 +10,6 @@ interface Props {
   isFavorite: boolean
 }
 
-
 const props = withDefaults(defineProps<Props>(), {
   productId: 10000,
   type: "auction",
@@ -19,12 +18,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const changeFavorite = () => {
-  let store = useProductStore();
-  console.log('try to toggle');
-  store.toggleFavorite(props.productId);
-  console.log();
-  console.log(`is Favorite ${props.isFavorite}`);
-  return;
+  console.log('EVENT')
+  useProductStore().toggleFavorite(props.productId)
 };
 
 const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
@@ -57,7 +52,7 @@ const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые 
       </table>
       <div class="product-card__btn-wrapper">
         <UiButton />
-        <UiButtonFav @update:isActive="changeFavorite" v-model:is-active="props.isFavorite" />
+        <UiButtonFav @update:isActive="changeFavorite" :isActive="props.isFavorite" />
       </div>
     </div>
   </li>

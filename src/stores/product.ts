@@ -26,12 +26,9 @@ const useProductStore = defineStore('product', {
 
   actions: {
     toggleFavorite(id: number): void {
-      const product = this.productsList.find(product => product.id == id);
-      console.log(`product ${product} with id ${id}`);
-      console.log(this.productsList);
+      const product = this.getProductById(id);
       if (!product) return;
       product.isFavorite = !product?.isFavorite;
-      console.log(`new in store ${product.isFavorite}`)
     }
   }
 });
