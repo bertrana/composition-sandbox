@@ -1,13 +1,21 @@
 <script setup lang="ts">
+
+interface Props {
+  btnTitle: string,
+  btnClass: string
+}
+
 const props = defineProps({
-  btnType: String //addToDeal, toPay, wasPaid
+  btnTitle: String,
+  btnClass: String
 });
 
+const emit = defineEmits(['wasClicked']);
 
 </script>
 
 <template>
-  <button class="button">Добавить в сделки</button>
+  <button class="button" :class="props.btnClass" @click="$emit('wasClicked')">{{ props.btnTitle }}</button>
 </template>
 
 <style>

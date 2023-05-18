@@ -9,5 +9,5 @@ const productList = productStore.getFavorites;
 
 <template>
   <h1>Favorites</h1>
-  <UiProductList :productList="productList" />
+  <UiProductList :productList="productList" pageType="favorites" />
 </template>

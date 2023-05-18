@@ -13,19 +13,22 @@ const defaultProduct: Array<Product> = [{
 import UiProductCard from './UiProductCard.vue';
 
 interface Props {
-  productList: Product[]
+  productList: Product[],
+  pageType: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  productList: () => defaultProduct
+  productList: () => defaultProduct,
+  pageType: "stock"
 })
+
 
 </script>
 
 <template>
   <ul class="product__list">
     <UiProductCard v-for="product in props.productList" :key="product.id" :title="product.name" :deal-type="product.type"
-      :product-id="product.id" :isFavorite="product.isFavorite" />
+      :product-id="product.id" :isFavorite="product.isFavorite" :page-type="pageType" />
   </ul>
 </template>
 

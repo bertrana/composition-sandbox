@@ -8,5 +8,5 @@ const productList = productStore.getAddedToDeals;
 
 <template>
   <h1>Deals</h1>
-  <UiProductList :productList="productList" />
+  <UiProductList :productList="productList" pageType="deals" />
 </template>

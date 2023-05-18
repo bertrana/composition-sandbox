@@ -4,6 +4,7 @@ import UiButtonFav from './UiButtonFav.vue';
 import useProductStore from '@/stores/product';
 
 interface Props {
+  pageType: string,
   productId: number,
   title: string,
   dealType: string,
@@ -11,15 +12,28 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  pageType: "stock",
   productId: 10000,
   type: "auction",
   title: "Бревно",
   isFavorite: false
 })
 
-const changeFavorite = () => useProductStore().toggleFavorite(props.productId);
+const store = useProductStore();
+const changeFavorite = () => store.toggleFavorite(props.productId);
 
 const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
+
+let btnTitle = "Добавить в сделки";
+
+if (props.pageType == 'deals') {
+  btnTitle = store.getProductById(props.productId)?.isAddedToDeals ? "Оплачено" : "Оплатить";
+}
+
+const handlerButton = function () {
+
+}
+
 </script>
 
 <template>
@@ -48,7 +62,7 @@ const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые 
         </tr>
       </table>
       <div class="product-card__btn-wrapper">
-        <UiButton />
+        <UiButton :btnTitle="btnTitle" @wasClicked="handlerButton" />
         <UiButtonFav @update:isActive="changeFavorite" :isActive="props.isFavorite" />
       </div>
     </div>

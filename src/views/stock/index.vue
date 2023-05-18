@@ -9,5 +9,5 @@ const productList = productStore.productsList;
 
 <template>
   <h1>Stock</h1>
-  <UiProductList :productList="productList" />
+  <UiProductList :productList="productList" pageType="stock" />
 </template>
