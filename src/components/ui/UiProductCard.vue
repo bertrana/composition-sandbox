@@ -1,12 +1,31 @@
 <script lang="ts" setup>
 import UiButton from './UiButton.vue';
 import UiButtonFav from './UiButtonFav.vue';
+import useProductStore from '@/stores/product';
 
-const props = defineProps({
-  title: String,
-  dealType: String,
-  isFavorite: Boolean
+interface Props {
+  productId: number,
+  title: string,
+  dealType: string,
+  isFavorite: boolean
+}
+
+
+const props = withDefaults(defineProps<Props>(), {
+  productId: 10000,
+  type: "auction",
+  title: "Бревно",
+  isFavorite: false
 })
+
+const changeFavorite = () => {
+  let store = useProductStore();
+  console.log('try to toggle');
+  store.toggleFavorite(props.productId);
+  console.log();
+  console.log(`is Favorite ${props.isFavorite}`);
+  return;
+};
 
 const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
 </script>
@@ -38,7 +57,7 @@ const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые 
       </table>
       <div class="product-card__btn-wrapper">
         <UiButton />
-        <UiButtonFav :is-active="props.isFavorite" />
+        <UiButtonFav @update:isActive="changeFavorite" v-model:is-active="props.isFavorite" />
       </div>
     </div>
   </li>

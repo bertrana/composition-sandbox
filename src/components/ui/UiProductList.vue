@@ -1,14 +1,16 @@
 <script lang="ts">
+import Product from '@/types/ProductType';
+
 const defaultProduct: Array<Product> = [{
   id: 10000,
   type: "auction",
   name: "Бревно",
+  isFavorite: false
 }];
 </script>
 
 <script setup lang="ts">
 import UiProductCard from './UiProductCard.vue';
-import Product from '@/types/ProductType';
 
 interface Props {
   productList: Product[]
@@ -23,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
   <ul class="product__list">
     <UiProductCard v-for="product in props.productList" :key="product.id" :title="product.name" :deal-type="product.type"
-      :isFavorite="product.isFavorite" />
+      :product-id="product.id" :isFavorite="product.isFavorite" />
   </ul>
 </template>
 
