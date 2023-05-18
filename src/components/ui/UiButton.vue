@@ -27,6 +27,6 @@ const props = defineProps({
 .button:hover {
   cursor: pointer;
 
-  background: #E0E3EE;
+  background: #969dc3;
 }
 </style>

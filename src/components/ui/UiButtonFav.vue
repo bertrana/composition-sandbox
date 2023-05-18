@@ -10,16 +10,11 @@ const emit = defineEmits(['update:isActive']);
 // const bgColor = { background: props.isActive ? "#2D3B87" : "#F4F5F9" };
 const heartColor = computed(() => props.isActive ? "#E5E5E5" : "#2D3B87");
 
-const updateValue = () => {
-  emit('update:isActive')
-  console.log('BTN EVENT')
-}
-
-
+const updateValue = () => emit('update:isActive');
 </script>
 
 <template>
-  <label class="button button_favorite">
+  <label class="button button_favorite" :class="{ button_favorite_checked: isActive }">
     <input class="visually-hidden" type="checkbox" :checked="isActive" @change="updateValue" true-value="1"
       false-value="0">
     <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,11 +27,19 @@ const updateValue = () => {
 
 <style>
 .button_favorite {
+  position: relative;
+
   width: 40px;
   height: 40px;
 }
 
 .button_favorite_checked {
   background: #2D3B87;
+}
+
+.button_favorite svg {
+  position: absolute;
+  top: 12px;
+  left: 12px;
 }
 </style>

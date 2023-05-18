@@ -17,10 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   isFavorite: false
 })
 
-const changeFavorite = () => {
-  console.log('EVENT')
-  useProductStore().toggleFavorite(props.productId)
-};
+const changeFavorite = () => useProductStore().toggleFavorite(props.productId);
 
 const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
 </script>
