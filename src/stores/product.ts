@@ -16,6 +16,8 @@ const useProductStore = defineStore('product', {
 
     getAddedToDeals({ productsList }) { return productsList.filter(product => product.isAddedToDeals) },
 
+    getNotPaidDeals({ productsList }) { return productsList.filter(product => product.isAddedToDeals && !product.isPaid) },
+
     getAuctions({ productsList }) { return productsList.filter(product => product.type == "auction") },
 
     getDirectDeals({ productsList }) { return productsList.filter(product => product.type == "directDeals") },
@@ -40,16 +42,6 @@ const useProductStore = defineStore('product', {
       const product = this.getProductById(id);
       if (!product) return;
       product.isAddedToDeals = true;
-      // if (!this.dealsList) {
-      //   this.dealsList = {
-      //     deal: product,
-      //     count: 1
-      //   }
-      // }
-      // this.dealsList.push({
-      //   deal: product,
-      //   count: 1
-      // })
     }
   }
 });

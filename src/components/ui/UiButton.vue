@@ -25,6 +25,7 @@ const emit = defineEmits(['wasClicked']);
 
   padding: 0;
 
+  font-weight: 500;
   text-align: center;
 
   background: #F4F5F9;
@@ -35,6 +36,10 @@ const emit = defineEmits(['wasClicked']);
     cursor: pointer;
 
     background: #969dc3;
+  }
+
+  &:active {
+    box-shadow: 1px 1px 10px #969dc3;
   }
 
   &_active {

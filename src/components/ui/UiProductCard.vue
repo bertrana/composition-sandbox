@@ -120,7 +120,6 @@ let btnProperties = computed(() => {
 }
 
 .product-card__text-wrapper {
-  max-width: 536px;
   margin-top: 20px;
 }
 

@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import UiButton from '../ui/UiButton.vue';
+import ModalDeals from '../modal/ModalDeals.vue';
 
 interface HeaderLink {
   linkClass: string;
@@ -24,6 +27,13 @@ const headerLinks: HeaderLink[] = [
     linkClass: 'deals',
   },
 ];
+
+let isOpened = ref(false);
+
+// const toggleModal = function () {
+//   isOpened = !isOpened;
+// }
+
 </script>
 
 <template>
@@ -33,38 +43,43 @@ const headerLinks: HeaderLink[] = [
         {{ link.title }}
       </RouterLink>
     </nav>
+    <UiButton class="modal__open-button" btnTitle="Show Modal" @wasClicked="isOpened = true" />
+    <teleport to="body">
+      <ModalDeals :openModal="isOpened" @closeModal="isOpened = false" />
+    </teleport>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
 header {
   position: relative;
 
   margin-bottom: 40px;
-}
 
-header::before {
-  content: "";
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
 
-  position: absolute;
+    margin-left: auto;
+    padding-top: 60px;
+  }
 
-  width: 100%;
-  height: 40px;
+  &::before {
+    content: "";
 
-  background-color: #e0e3ee;
-  border-radius: 0px 0px 10px 10px;
-}
+    position: absolute;
 
-header .wrapper {
-  padding-top: 40px;
+    width: 100%;
+    height: 40px;
+
+    background-color: #e0e3ee;
+    border-radius: 0px 0px 10px 10px;
+  }
 }
 
 nav {
   display: flex;
   justify-content: end;
-
-  margin-top: 20px;
-  margin-left: auto;
 }
 
 nav a {
