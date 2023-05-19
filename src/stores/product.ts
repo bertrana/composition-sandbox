@@ -7,6 +7,7 @@ const useProductStore = defineStore('product', {
   state: () => {
     return {
       productsList: getProductList(10)
+      // dealsList: Array<Object>
     }
   },
 
@@ -29,6 +30,26 @@ const useProductStore = defineStore('product', {
       const product = this.getProductById(id);
       if (!product) return;
       product.isFavorite = !product?.isFavorite;
+    },
+    activePaymentStatus(id: number): void {
+      const product = this.getProductById(id);
+      if (!product) return;
+      product.isPaid = true;
+    },
+    addDeal(id: number): void {
+      const product = this.getProductById(id);
+      if (!product) return;
+      product.isAddedToDeals = true;
+      // if (!this.dealsList) {
+      //   this.dealsList = {
+      //     deal: product,
+      //     count: 1
+      //   }
+      // }
+      // this.dealsList.push({
+      //   deal: product,
+      //   count: 1
+      // })
     }
   }
 });

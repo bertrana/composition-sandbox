@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
 import UiButton from './UiButton.vue';
 import UiButtonFav from './UiButtonFav.vue';
 import useProductStore from '@/stores/product';
@@ -8,31 +9,62 @@ interface Props {
   productId: number,
   title: string,
   dealType: string,
-  isFavorite: boolean
+  isFavorite: boolean,
+  isPaid: boolean
+}
+
+interface ButtonProperty {
+  text: string,
+  class: string,
+  handler: Function
 }
 
 const props = withDefaults(defineProps<Props>(), {
   pageType: "stock",
-  productId: 10000,
   type: "auction",
   title: "Бревно",
-  isFavorite: false
+  isFavorite: false,
+  isPaid: false
 })
 
 const store = useProductStore();
 const changeFavorite = () => store.toggleFavorite(props.productId);
 
+const addToDeals = function () {
+  console.log("try to add");
+  store.addDeal(props.productId);
+}
+
+const doPayment = function () {
+  console.log("do payment");
+  store.activePaymentStatus(props.productId);
+}
+
 const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
 
-let btnTitle = "Добавить в сделки";
+let btnProperties = computed(() => {
+  if (props.pageType === 'deals') {
+    if (store.getProductById(props.productId)?.isPaid) {
+      return {
+        text: "Оплачено",
+        class: 'button_disabled',
+        handler: () => console.log("was paid")
+      };
+    }
+    return {
+      text: "Оплатить",
+      class: 'button_active',
+      handler: doPayment
+    };
+  }
+  return {
+    text: "Добавить в сделки",
+    class: '',
+    handler: addToDeals,
+  };
+});
 
-if (props.pageType == 'deals') {
-  btnTitle = store.getProductById(props.productId)?.isAddedToDeals ? "Оплачено" : "Оплатить";
-}
 
-const handlerButton = function () {
-
-}
 
 </script>
 
@@ -62,7 +94,7 @@ const handlerButton = function () {
         </tr>
       </table>
       <div class="product-card__btn-wrapper">
-        <UiButton :btnTitle="btnTitle" @wasClicked="handlerButton" />
+        <UiButton :class="btnProperties.class" :btnTitle="btnProperties.text" @wasClicked="btnProperties.handler" />
         <UiButtonFav @update:isActive="changeFavorite" :isActive="props.isFavorite" />
       </div>
     </div>

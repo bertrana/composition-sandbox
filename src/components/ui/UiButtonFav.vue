@@ -7,7 +7,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:isActive']);
 
-// const bgColor = { background: props.isActive ? "#2D3B87" : "#F4F5F9" };
 const heartColor = computed(() => props.isActive ? "#E5E5E5" : "#2D3B87");
 
 const updateValue = () => emit('update:isActive');
@@ -25,7 +24,7 @@ const updateValue = () => emit('update:isActive');
   </label>
 </template>
 
-<style>
+<style lang="scss">
 .button_favorite {
   position: relative;
 

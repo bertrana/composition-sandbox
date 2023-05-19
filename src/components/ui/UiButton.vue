@@ -18,7 +18,7 @@ const emit = defineEmits(['wasClicked']);
   <button class="button" :class="props.btnClass" @click="$emit('wasClicked')">{{ props.btnTitle }}</button>
 </template>
 
-<style>
+<style lang="scss">
 .button {
   min-height: 40px;
   width: 222px;
@@ -30,11 +30,28 @@ const emit = defineEmits(['wasClicked']);
   background: #F4F5F9;
   border: none;
   border-radius: 10px;
-}
 
-.button:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
 
-  background: #969dc3;
+    background: #969dc3;
+  }
+
+  &_active {
+    color: #fff;
+    background: #69C57F;
+  }
+
+  &_disabled {
+    color: #969DC3;
+
+    background: #fff;
+    border: 1px solid #E0E3EE;
+
+    &:hover {
+      cursor: initial;
+      background: #fff;
+    }
+  }
 }
 </style>
