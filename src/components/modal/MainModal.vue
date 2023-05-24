@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import DealsModal from './DealsModal.vue';
 import PaymentModal from './PaymentModal.vue';
 import { useModal } from '@/core/useModal';
@@ -10,23 +12,26 @@ const modals = {
   payment: PaymentModal
 }
 
-if (!Object.hasOwn(modals, data.modalType)) {
-  console.log("problem");
-  data.modalType = "deals";
-}
+const currentModal = computed(() => {
+  if (!data.modalType) data.modalType = 'deals';
+  const modalName = data.modalType as keyof typeof modals;
+  return modals[modalName];
+})
 
 </script>
 
 <template>
-  <div class="modal__overlay" v-if="data.isOpen" @click.self="closeModal">
-    <div class="modal">
-      <div class="modal__header">
-        <h2>Modal {{ data.modalType }} page</h2>
-        <button @click="closeModal">Close</button>
+  <Teleport to="body">
+    <div class="modal__overlay" v-if="data.isOpen" @click.self="closeModal">
+      <div class="modal">
+        <div class="modal__header">
+          <h2>Modal {{ data.modalType }} page</h2>
+          <button @click="closeModal">Close</button>
+        </div>
+        <component :is="currentModal"></component>
       </div>
-      <component :is="modals[data.modalType]"></component>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <style lang="scss">
@@ -49,6 +54,8 @@ if (!Object.hasOwn(modals, data.modalType)) {
   width: 800px;
 
   padding: 20px;
+
+  overflow: auto;
 
   background: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 75px;
