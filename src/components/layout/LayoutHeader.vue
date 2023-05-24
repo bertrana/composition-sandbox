@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import UiButton from '../ui/UiButton.vue';
-import ModalDeals from '../modal/ModalDeals.vue';
+import { useModal } from '@/core/useModal';
 
 interface HeaderLink {
   linkClass: string;
@@ -28,11 +27,7 @@ const headerLinks: HeaderLink[] = [
   },
 ];
 
-let isOpened = ref(false);
-
-// const toggleModal = function () {
-//   isOpened = !isOpened;
-// }
+const { openModal, data } = useModal();
 
 </script>
 
@@ -43,10 +38,7 @@ let isOpened = ref(false);
         {{ link.title }}
       </RouterLink>
     </nav>
-    <UiButton class="modal__open-button" btnTitle="Show Modal" @wasClicked="isOpened = true" />
-    <teleport to="body">
-      <ModalDeals :openModal="isOpened" @closeModal="isOpened = false" />
-    </teleport>
+    <UiButton class="modal__open-button" btnTitle="Show Modal" @wasClicked="openModal('deals')" />
   </div>
 </template>
 

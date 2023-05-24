@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import UiButton from './UiButton.vue';
 import UiButtonFav from './UiButtonFav.vue';
 import useProductStore from '@/stores/product';
+import { useModal } from '@/core/useModal';
 
 interface Props {
   pageType: string,
@@ -28,22 +29,24 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const store = useProductStore();
+
+const { openModal, data } = useModal();
+
 const changeFavorite = () => store.toggleFavorite(props.productId);
 
 const addToDeals = function () {
-  console.log("try to add");
   store.addDeal(props.productId);
 }
 
 const doPayment = function () {
-  console.log("do payment");
+  openModal("payment");
   store.activePaymentStatus(props.productId);
 }
 
 const dealType = props.dealType == "auction" ? "Аукцион" : "Прямые продажи";
 
 let btnProperties = computed(() => {
-  if (props.pageType === 'deals') {
+  if (props.pageType === 'deals' || props.pageType === 'modal-deals') {
     if (store.getProductById(props.productId)?.isPaid) {
       return {
         text: "Оплачено",
@@ -63,14 +66,12 @@ let btnProperties = computed(() => {
     handler: addToDeals,
   };
 });
-
-
-
 </script>
 
 <template>
   <li class="product-card">
-    <img class="product-card__img" src="@/assets/images/card-image.png" alt="Card image" width="256" height="256">
+    <img v-if="props.pageType != 'modal-deals'" class="product-card__img" src="@/assets/images/card-image.png"
+      alt="Card image" width="256" height="256">
     <div class="product-card__text-wrapper">
       <b class="product-card__deal-type">{{ dealType }}</b>
       <h3 class="product-card__title">Пиломатериалы {{ props.title?.toLowerCase() }}</h3>

@@ -21,8 +21,6 @@ const getProductList = function (num: number): Product[] {
   for (let i = 0; i < num; i++) {
     arr.push(randomProductCard());
   }
-  console.log(arr);
-
   return arr;
 }
 
