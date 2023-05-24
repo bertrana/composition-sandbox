@@ -2,7 +2,7 @@
   <div class="search">
     <input type="search" id="search" placeholder="Поиск" />
     <label class="visually-hidden" for="search">Поиск</label>
-    <button class="" type="button">Искать</button>
+    <button class="button" type="button">Искать</button>
   </div>
 </template>
 

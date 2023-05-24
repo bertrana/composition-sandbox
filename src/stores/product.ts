@@ -1,13 +1,13 @@
-import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import Product from '@/types/ProductType';
 import getProductList from '@/core/getProductList';
+import { setChangesToCookies } from '@/core/useCookies';
+
 
 const useProductStore = defineStore('product', {
   state: () => {
     return {
       productsList: getProductList(10)
-      // dealsList: Array<Object>
     }
   },
 
@@ -32,16 +32,19 @@ const useProductStore = defineStore('product', {
       const product = this.getProductById(id);
       if (!product) return;
       product.isFavorite = !product?.isFavorite;
+      setChangesToCookies(id, product);
     },
     activePaymentStatus(id: number): void {
       const product = this.getProductById(id);
       if (!product) return;
       product.isPaid = true;
+      setChangesToCookies(id, product);
     },
     addDeal(id: number): void {
       const product = this.getProductById(id);
       if (!product) return;
       product.isAddedToDeals = true;
+      setChangesToCookies(id, product);
     }
   }
 });

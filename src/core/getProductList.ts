@@ -1,4 +1,5 @@
 import Product from '@/types/ProductType';
+import { getInfoFromCookies } from './useCookies';
 
 const randomBoolean = function (): boolean {
   return Math.random() >= 0.5;
@@ -17,7 +18,14 @@ const randomProductCard = function (): Product {
 
 const getProductList = function (num: number): Product[] {
   // Заменить генерацию рандомных элементов на запрос
-  let arr = [];
+
+  let arr: Product[] = [];
+
+  if (document.cookie) {
+    arr = getInfoFromCookies();
+    num -= arr.length;
+  }
+
   for (let i = 0; i < num; i++) {
     arr.push(randomProductCard());
   }
