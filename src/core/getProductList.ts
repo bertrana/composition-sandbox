@@ -17,19 +17,17 @@ const randomProductCard = function (): Product {
 }
 
 const getProductList = function (num: number): Product[] {
-  // Заменить генерацию рандомных элементов на запрос
+  const dataFromCookies = getInfoFromCookies()
 
-  let arr: Product[] = [];
+  if (!document.cookie || dataFromCookies.length === 0) {
+    let arr: Product[] = [];
 
-  if (document.cookie) {
-    arr = getInfoFromCookies();
-    num -= arr.length;
+    for (let i = 0; i < num; i++) {
+      arr.push(randomProductCard());
+    }
+    return arr;
   }
-
-  for (let i = 0; i < num; i++) {
-    arr.push(randomProductCard());
-  }
-  return arr;
+  return dataFromCookies;
 }
 
 export default getProductList;

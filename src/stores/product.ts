@@ -1,18 +1,24 @@
 import { defineStore } from 'pinia';
 import Product from '@/types/ProductType';
 import getProductList from '@/core/getProductList';
-import { setChangesToCookies } from '@/core/useCookies';
+import { setCookies } from '@/core/useCookies';
 
 
 const useProductStore = defineStore('product', {
   state: () => {
+    const list = getProductList(10);
+    setCookies(list);
+
     return {
-      productsList: getProductList(10)
+      productsList: list
     }
   },
 
   getters: {
-    getFavorites({ productsList }) { return productsList.filter(product => product.isFavorite) },
+    getFavorites({ productsList }) {
+      console.log(productsList);
+      return productsList.filter(product => product.isFavorite)
+    },
 
     getAddedToDeals({ productsList }) { return productsList.filter(product => product.isAddedToDeals) },
 
@@ -32,19 +38,19 @@ const useProductStore = defineStore('product', {
       const product = this.getProductById(id);
       if (!product) return;
       product.isFavorite = !product?.isFavorite;
-      setChangesToCookies(id, product);
+      setCookies(this.productsList);
     },
     activePaymentStatus(id: number): void {
       const product = this.getProductById(id);
       if (!product) return;
       product.isPaid = true;
-      setChangesToCookies(id, product);
+      setCookies(this.productsList);
     },
     addDeal(id: number): void {
       const product = this.getProductById(id);
       if (!product) return;
       product.isAddedToDeals = true;
-      setChangesToCookies(id, product);
+      setCookies(this.productsList);
     }
   }
 });

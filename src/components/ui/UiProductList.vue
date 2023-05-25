@@ -18,7 +18,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  productList: () => defaultProduct,
+  productList: () => [],
   pageType: "stock"
 })
 
@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <ul class="product__list">
-    <UiProductCard v-for="product in props.productList" :key="product.id" :title="product.name" :deal-type="product.type"
+    <UiProductCard v-for="product in productList" :key="product.id" :title="product.name" :deal-type="product.type"
       :product-id="product.id" :isFavorite="product.isFavorite" :page-type="pageType" />
   </ul>
 </template>
